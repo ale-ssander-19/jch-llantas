@@ -1,15 +1,506 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
-  <meta charset="UTF-8">
-  <title>JCH Llantas</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCH Llantas</title>
+
+    <style>
+        :root {
+            --rojo-jch: #d71920;
+            --rojo-oscuro: #a80f15;
+            --negro: #111111;
+            --gris-oscuro: #2b2b2b;
+            --gris: #6b7280;
+            --gris-claro: #f3f4f6;
+            --blanco: #ffffff;
+            --borde: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(215, 25, 32, 0.18), transparent 32%),
+                linear-gradient(135deg, #111111 0%, #222222 45%, #f4f4f4 45%, #f4f4f4 100%);
+            color: var(--negro);
+            min-height: 100vh;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lead-container {
+            width: 100%;
+            max-width: 1120px;
+            display: grid;
+            grid-template-columns: 0.95fr 1.25fr;
+            background: var(--blanco);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .hero-panel {
+            position: relative;
+            padding: 48px 38px;
+            color: var(--blanco);
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.82)),
+                url("https://images.unsplash.com/photo-1629732447077-9d707f7c0b3c?auto=format&fit=crop&w=1200&q=80");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border: 34px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            right: -90px;
+            bottom: -90px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(215, 25, 32, 0.95);
+            color: var(--blanco);
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .badge span {
+            width: 9px;
+            height: 9px;
+            background: var(--blanco);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .hero-panel h1 {
+            position: relative;
+            margin: 28px 0 18px;
+            font-size: 42px;
+            line-height: 1.08;
+            letter-spacing: -1px;
+            z-index: 1;
+        }
+
+        .hero-panel p {
+            position: relative;
+            margin: 0;
+            color: #e5e7eb;
+            line-height: 1.65;
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        .hero-benefits {
+            position: relative;
+            margin-top: 34px;
+            display: grid;
+            gap: 14px;
+            z-index: 1;
+        }
+
+        .benefit {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px;
+            border-radius: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .benefit-icon {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 50%;
+            background: var(--rojo-jch);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .benefit strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .benefit small {
+            color: #d1d5db;
+            line-height: 1.4;
+        }
+
+        .form-panel {
+            padding: 42px;
+            background: #ffffff;
+        }
+
+        .form-header {
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            margin: 0 0 10px;
+            font-size: 30px;
+            color: var(--negro);
+            letter-spacing: -0.5px;
+        }
+
+        .form-header p {
+            margin: 0;
+            color: var(--gris);
+            line-height: 1.55;
+            font-size: 15px;
+        }
+
+        .jch-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gris-oscuro);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--borde);
+            background: #f9fafb;
+            border-radius: 13px;
+            padding: 13px 14px;
+            font-size: 15px;
+            color: var(--negro);
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--rojo-jch);
+            background: var(--blanco);
+            box-shadow: 0 0 0 4px rgba(215, 25, 32, 0.12);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 105px;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--gris);
+        }
+
+        .submit-area {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .submit-button {
+            border: none;
+            background: linear-gradient(135deg, var(--rojo-jch), var(--rojo-oscuro));
+            color: var(--blanco);
+            padding: 16px 22px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 14px 28px rgba(215, 25, 32, 0.28);
+            transition: 0.2s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(215, 25, 32, 0.35);
+        }
+
+        .privacy-text {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--gris);
+            text-align: center;
+        }
+
+        .required {
+            color: var(--rojo-jch);
+        }
+
+        @media (max-width: 900px) {
+            .lead-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                padding: 38px 28px;
+            }
+
+            .hero-panel h1 {
+                font-size: 34px;
+            }
+
+            .form-panel {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .page-wrapper {
+                padding: 18px 12px;
+            }
+
+            .jch-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-header h2 {
+                font-size: 25px;
+            }
+
+            .hero-panel h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <main class="page-wrapper">
+        <section class="lead-container">
 
-  <h1>JCH Llantas</h1>
-  <p>Bienvenido, solicita información sobre nuestras llantas.</p>
+            <aside class="hero-panel">
+                <div class="badge">
+                    <span></span>
+                    Cotización rápida
+                </div>
 
-  <!-- Aquí luego irá tu formulario de Salesforce -->
+                <h1>Encuentra la llanta ideal para tu unidad</h1>
 
+                <p>
+                    Déjanos tus datos y un asesor comercial te ayudará a cotizar llantas para transporte liviano,
+                    pesado, tractos, buses, camionetas, SUV o maquinaria.
+                </p>
+
+                <div class="hero-benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">✓</div>
+                        <div>
+                            <strong>Asesoría especializada</strong>
+                            <small>Te orientamos según medida, vehículo, marca y tipo de operación.</small>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">⚙</div>
+                        <div>
+                            <strong>Para flotas y uso particular</strong>
+                            <small>Atención para automóvil, camión, bus, volquete, tracto e industriales.</small>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">⏱</div>
+                        <div>
+                            <strong>Respuesta comercial rápida</strong>
+                            <small>Indica tu plazo de compra y medio preferido de contacto.</small>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="form-panel">
+                <div class="form-header">
+                    <h2>Solicita tu cotización</h2>
+                    <p>
+                        Completa el formulario y registraremos tu solicitud para que un asesor pueda contactarte.
+                    </p>
+                </div>
+
+                <form class="jch-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dg8000004qrnV" method="POST">
+
+                    <input type="hidden" name="oid" value="00Dg8000004qrnV">
+                    <input type="hidden" name="retURL" value="http://www.salesforce.com">
+
+                    <div class="form-group">
+                        <label for="first_name">Nombre <span class="required">*</span></label>
+                        <input id="first_name" maxlength="40" name="first_name" type="text" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name">Apellidos <span class="required">*</span></label>
+                        <input id="last_name" maxlength="80" name="last_name" type="text" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Compañía <span class="required">*</span></label>
+                        <input id="company" maxlength="40" name="company" type="text" required>
+                        <span class="hint">Si eres persona natural, puedes colocar “Particular”.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input id="email" maxlength="80" name="email" type="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">Celular <span class="required">*</span></label>
+                        <input id="mobile" maxlength="40" name="mobile" type="tel" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Ciudad</label>
+                        <input id="city" maxlength="40" name="city" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005CszR">Segmento de vehículo</label>
+                        <select id="00Ng8000005CszR" name="00Ng8000005CszR" title="Segmento de vehículo">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Automóvil">Automóvil</option>
+                            <option value="4x4 / SUV">4x4 / SUV</option>
+                            <option value="Van / Camión ligero">Van / Camión ligero</option>
+                            <option value="Camión / Bus">Camión / Bus</option>
+                            <option value="Volquete">Volquete</option>
+                            <option value="Tractores / Industriales">Tractores / Industriales</option>
+                            <option value="Cargador frontal">Cargador frontal</option>
+                            <option value="Motocicletas / ATV">Motocicletas / ATV</option>
+                            <option value="Runflat">Runflat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005Ct4H">Tipo de transporte</label>
+                        <select id="00Ng8000005Ct4H" name="00Ng8000005Ct4H" title="Tipo de transporte">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Transporte liviano">Transporte liviano</option>
+                            <option value="Transporte pesado">Transporte pesado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005CtFZ">Producto de interés</label>
+                        <select id="00Ng8000005CtFZ" name="00Ng8000005CtFZ" title="Producto de interés">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Llanta">Llanta</option>
+                            <option value="Cámara">Cámara</option>
+                            <option value="Lubricante">Lubricante</option>
+                            <option value="Accesorio">Accesorio</option>
+                            <option value="Servicio / Asesoría">Servicio / Asesoría</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005Cyn7">Medida de llanta</label>
+                        <input id="00Ng8000005Cyn7" maxlength="128" name="00Ng8000005Cyn7" type="text" placeholder="Ej. 195/65 R15, 295/80 R22.5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005Ct14">Marca de interés</label>
+                        <select id="00Ng8000005Ct14" name="00Ng8000005Ct14" title="Marca de interés">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Austone">Austone</option>
+                            <option value="Kumho">Kumho</option>
+                            <option value="Dunlop">Dunlop</option>
+                            <option value="Continental">Continental</option>
+                            <option value="Westlake">Westlake</option>
+                            <option value="Triangle">Triangle</option>
+                            <option value="LingLong">LingLong</option>
+                            <option value="Pirelli">Pirelli</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005ClD6">Cantidad requerida</label>
+                        <input id="00Ng8000005ClD6" name="00Ng8000005ClD6" type="number" min="1" placeholder="Ej. 4">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005Cv2r">Plazo estimado de compra</label>
+                        <select id="00Ng8000005Cv2r" name="00Ng8000005Cv2r" title="Plazo estimado de compra">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Inmediato">Inmediato</option>
+                            <option value="Esta semana">Esta semana</option>
+                            <option value="Este mes">Este mes</option>
+                            <option value="Próximos 3 meses">Próximos 3 meses</option>
+                            <option value="Solo consulta">Solo consulta</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="00Ng8000005CvIz">Medio preferido de contacto</label>
+                        <select id="00Ng8000005CvIz" name="00Ng8000005CvIz" title="Medio preferido de contacto">
+                            <option value="">Selecciona una opción</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="Llamada">Llamada</option>
+                            <option value="Correo electrónico">Correo electrónico</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="00Ng8000005D6uL">Comentario</label>
+                        <textarea id="00Ng8000005D6uL" maxlength="255" name="00Ng8000005D6uL" placeholder="Cuéntanos qué unidad tienes, qué medida buscas o si necesitas atención para flota."></textarea>
+                    </div>
+
+                    <div class="submit-area">
+                        <button class="submit-button" type="submit" name="submit">
+                            Solicitar cotización
+                        </button>
+                        <p class="privacy-text">
+                            Al enviar este formulario, tus datos serán registrados para que un asesor comercial pueda contactarte.
+                        </p>
+                    </div>
+
+                </form>
+            </section>
+        </section>
+    </main>
 </body>
 </html>
