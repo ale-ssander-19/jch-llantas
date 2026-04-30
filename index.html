@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCH Llantas</title>
+    <title>JCH Llantas | Cotización</title>
 
     <style>
         :root {
@@ -368,9 +368,14 @@
                     <input type="hidden" name="oid" value="00Dg8000004qrnV">
                     <input type="hidden" name="retURL" value="http://www.salesforce.com">
 
+                    <!-- Debug opcional: úsalo solo para pruebas
+                    <input type="hidden" name="debug" value="1">
+                    <input type="hidden" name="debugEmail" value="alexander.veliz@protiviti.com.pe">
+                    -->
+
                     <div class="form-group">
-                        <label for="first_name">Nombre <span class="required">*</span></label>
-                        <input id="first_name" maxlength="40" name="first_name" type="text" required>
+                        <label for="first_name">Nombre</label>
+                        <input id="first_name" maxlength="40" name="first_name" type="text">
                     </div>
 
                     <div class="form-group">
@@ -385,13 +390,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Correo electrónico</label>
+                        <label for="email">Email</label>
                         <input id="email" maxlength="80" name="email" type="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mobile">Celular <span class="required">*</span></label>
-                        <input id="mobile" maxlength="40" name="mobile" type="tel" required>
                     </div>
 
                     <div class="form-group">
@@ -400,9 +400,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="mobile">Celular</label>
+                        <input id="mobile" maxlength="40" name="mobile" type="tel">
+                    </div>
+
+                    <div class="form-group">
                         <label for="00Ng8000005CszR">Segmento de vehículo</label>
                         <select id="00Ng8000005CszR" name="00Ng8000005CszR" title="Segmento de vehículo">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="Automóvil">Automóvil</option>
                             <option value="4x4 / SUV">4x4 / SUV</option>
                             <option value="Van / Camión ligero">Van / Camión ligero</option>
@@ -418,7 +423,7 @@
                     <div class="form-group">
                         <label for="00Ng8000005Ct4H">Tipo de transporte</label>
                         <select id="00Ng8000005Ct4H" name="00Ng8000005Ct4H" title="Tipo de transporte">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="Transporte liviano">Transporte liviano</option>
                             <option value="Transporte pesado">Transporte pesado</option>
                         </select>
@@ -427,7 +432,7 @@
                     <div class="form-group">
                         <label for="00Ng8000005CtFZ">Producto de interés</label>
                         <select id="00Ng8000005CtFZ" name="00Ng8000005CtFZ" title="Producto de interés">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="Llanta">Llanta</option>
                             <option value="Cámara">Cámara</option>
                             <option value="Lubricante">Lubricante</option>
@@ -444,7 +449,7 @@
                     <div class="form-group">
                         <label for="00Ng8000005Ct14">Marca de interés</label>
                         <select id="00Ng8000005Ct14" name="00Ng8000005Ct14" title="Marca de interés">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="Austone">Austone</option>
                             <option value="Kumho">Kumho</option>
                             <option value="Dunlop">Dunlop</option>
@@ -459,13 +464,13 @@
 
                     <div class="form-group">
                         <label for="00Ng8000005ClD6">Cantidad requerida</label>
-                        <input id="00Ng8000005ClD6" name="00Ng8000005ClD6" type="number" min="1" placeholder="Ej. 4">
+                        <input id="00Ng8000005ClD6" name="00Ng8000005ClD6" type="text" placeholder="Ej. 4">
                     </div>
 
                     <div class="form-group">
                         <label for="00Ng8000005Cv2r">Plazo estimado de compra</label>
                         <select id="00Ng8000005Cv2r" name="00Ng8000005Cv2r" title="Plazo estimado de compra">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="Inmediato">Inmediato</option>
                             <option value="Esta semana">Esta semana</option>
                             <option value="Este mes">Este mes</option>
@@ -477,7 +482,7 @@
                     <div class="form-group">
                         <label for="00Ng8000005CvIz">Medio preferido de contacto</label>
                         <select id="00Ng8000005CvIz" name="00Ng8000005CvIz" title="Medio preferido de contacto">
-                            <option value="">Selecciona una opción</option>
+                            <option value="">--Ninguno--</option>
                             <option value="WhatsApp">WhatsApp</option>
                             <option value="Llamada">Llamada</option>
                             <option value="Correo electrónico">Correo electrónico</option>
@@ -493,6 +498,7 @@
                         <button class="submit-button" type="submit" name="submit">
                             Solicitar cotización
                         </button>
+
                         <p class="privacy-text">
                             Al enviar este formulario, tus datos serán registrados para que un asesor comercial pueda contactarte.
                         </p>
